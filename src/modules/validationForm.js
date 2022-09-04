@@ -18,10 +18,9 @@ const validation = () => {
     inputsEmail.forEach((input) => {
       input.addEventListener("change", (e) => {
         if (
-          /[^[a-z\-\_\.\!\~\*]+@[a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+]/gi.test(
+          !/[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi.test(
             e.target.value
-          ) &&
-          e.target.value !== ""
+          )
         ) {
           alert("Ошибка: Неккоретный почтовый ящик");
           e.target.value = "";
@@ -39,7 +38,7 @@ const validation = () => {
     });
   };
 
-  form1.addEventListener("submit", (form1) => {
+  form1.addEventListener("submit", (event, form1) => {
     event.preventDefault();
     validate(form1);
   });
