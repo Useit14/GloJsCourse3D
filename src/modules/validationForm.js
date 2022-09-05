@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 const validation = () => {
   const form1 = document.getElementById("form1");
 
