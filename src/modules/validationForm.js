@@ -1,25 +1,26 @@
+/* eslint-disable indent */
 const validation = () => {
   const form1 = document.getElementById("form1");
 
   const validate = (form) => {
-    let isError = false;
     const inputsText = form.querySelectorAll("input[type=text]");
     const inputsEmail = form.querySelectorAll(".form-email");
     const inputsTel = form.querySelectorAll(".form-phone");
 
     inputsText.forEach((input) => {
       input.addEventListener("change", (e) => {
-        if (/\d+/gi.test(e.target.value) && e.target.value !== "")
-          isError && alert("Ошибка: Цифры не допустимы");
-        e.target.value = "";
+        if (!/[\W\-\s]+/gi.test(e.target.value) && e.target.value !== "") {
+          alert("Ошибка: Неккоректное имя");
+          e.target.value = "";
+        }
       });
     });
 
     inputsEmail.forEach((input) => {
       input.addEventListener("change", (e) => {
         if (
-          /[^[a-z\-\_\.\!\~\*]+@[a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+]/gi.test(
-            e.target.value
+          !e.target.value.match(
+            /[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi
           ) &&
           e.target.value !== ""
         ) {
@@ -31,7 +32,7 @@ const validation = () => {
 
     inputsTel.forEach((input) => {
       input.addEventListener("change", (e) => {
-        if (/[^\d-\(\)]+/gi.test(e.target.value) && e.target.value !== "") {
+        if (!e.target.value.match(/[\d-\(\)]+/gi) && e.target.value !== "") {
           alert("Ошибка: Неккоретный номер телефона");
           e.target.value = "";
         }
