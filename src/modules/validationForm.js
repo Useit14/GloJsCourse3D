@@ -3,7 +3,6 @@ const validation = () => {
   const userForm = document.querySelectorAll("form[name='user_form']");
 
   const validate = (e) => {
-    debugger;
     if (
       e.target.matches("input[type='text']") &&
       !/[\W\-\s]+/gi.test(e.target.value) &&
