@@ -8,7 +8,7 @@ const validation = () => {
 
   const calcBlock = document.querySelector(".calc-block");
 
-  calcBlock.addEventListener("change", (e) => {
+  calcBlock.addEventListener("input", (e) => {
     if (e.target.classList.contains("calc-item")) {
       validate(e.target);
     }

@@ -1,49 +1,42 @@
+/* eslint-disable indent */
 const validation = () => {
-  const form1 = document.getElementById("form1");
+  const userForm = document.querySelectorAll("form[name='user_form']");
 
-  const validate = (form) => {
-    const inputsText = form.querySelectorAll("input[type=text]");
-    const inputsEmail = form.querySelectorAll(".form-email");
-    const inputsTel = form.querySelectorAll(".form-phone");
+  const validate = (e) => {
+    debugger;
+    if (
+      e.target.matches("input[type='text']") &&
+      !/[\W\-\s]+/gi.test(e.target.value) &&
+      e.target.value !== ""
+    ) {
+      alert("Ошибка: Неккоректное имя");
+      e.target.value = "";
+    }
 
-    inputsText.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (!/[\W\-\s]+/gi.test(e.target.value) && e.target.value !== "") {
-          alert("Ошибка: Неккоректное имя");
-          e.target.value = "";
-        }
-      });
-    });
+    if (
+      e.target.classList.contains("form-email") &&
+      !e.target.value.match(
+        /[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi
+      ) &&
+      e.target.value !== ""
+    ) {
+      alert("Ошибка: Неккоретный почтовый ящик");
+      e.target.value = "";
+    }
 
-    inputsEmail.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (
-          !e.target.value.match(
-            /[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi
-          ) &&
-          e.target.value !== ""
-        ) {
-          alert("Ошибка: Неккоретный почтовый ящик");
-          e.target.value = "";
-        }
-      });
-    });
-
-    inputsTel.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (!e.target.value.match(/[\d-\(\)]+/gi) && e.target.value !== "") {
-          alert("Ошибка: Неккоретный номер телефона");
-          e.target.value = "";
-        }
-      });
-    });
+    if (
+      e.target.classList.contains("form-phone") &&
+      !e.target.value.match(/[\d-\(\)]+/gi) &&
+      e.target.value !== ""
+    ) {
+      alert("Ошибка: Неккоретный номер телефона");
+      e.target.value = "";
+    }
   };
 
-  form1.addEventListener("submit", (form1) => {
-    event.preventDefault();
-    validate(form1);
+  userForm.forEach((form) => {
+    form.addEventListener("change", (e) => validate(e));
   });
-  validate(form1);
 };
 
 export default validation;
