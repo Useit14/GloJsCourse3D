@@ -1,4 +1,6 @@
 /* eslint-disable indent */
+import { animate } from "./helpers";
+
 const calc = (price = 100) => {
   const calcBlock = document.querySelector(".calc-block");
   const calcType = document.querySelector(".calc-type");
@@ -6,19 +8,6 @@ const calc = (price = 100) => {
   const calcCount = document.querySelector(".calc-count");
   const calcDay = document.querySelector(".calc-day");
   const total = document.getElementById("total");
-  let interval;
-
-  const animateNumber = (end) => {
-    if (+total.textContent !== end) {
-      if (+total.textContent < end) {
-        total.textContent = +total.textContent + 1;
-      } else {
-        total.textContent = +total.textContent - 1;
-      }
-    } else {
-      clearInterval(interval);
-    }
-  };
 
   const countCalc = () => {
     const calcTypeValue = +calcType.options[calcType.selectedIndex].value;
@@ -41,9 +30,16 @@ const calc = (price = 100) => {
     } else {
       totalValue = 0;
     }
-    interval = setInterval(animateNumber, 1, totalValue);
+    animate({
+      duration: 500,
+      timing(timeFraction) {
+        return 1 - Math.sin(Math.acos(timeFraction));
+      },
+      draw(progress) {
+        total.textContent = parseInt(progress * +totalValue);
+      },
+    });
   };
-
   calcBlock.addEventListener("input", (e) => {
     if (
       e.target === calcType ||
