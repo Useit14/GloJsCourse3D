@@ -1,49 +1,52 @@
-const validation = () => {
-  const form1 = document.getElementById("form1");
+/* eslint-disable indent */
 
-  const validate = (form) => {
-    const inputsText = form.querySelectorAll("input[type=text]");
-    const inputsEmail = form.querySelectorAll(".form-email");
-    const inputsTel = form.querySelectorAll(".form-phone");
+const validate = (idForm) => {
+  const form1 = document.getElementById(idForm);
 
-    inputsText.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (!/[\W\-\s]+/gi.test(e.target.value) && e.target.value !== "") {
-          alert("Ошибка: Неккоректное имя");
-          e.target.value = "";
-        }
-      });
-    });
+  const inputsName = form1.querySelectorAll("input[name='user_name']");
+  const inputsEmail = form1.querySelectorAll("input[name='user_email']");
+  const inputsTel = form1.querySelectorAll("input[name='user_phone']");
+  const inputsMessage = form1.querySelectorAll("input[name='user_message']");
+  let response = true;
+  let message = [];
 
-    inputsEmail.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (
-          !e.target.value.match(
-            /[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi
-          ) &&
-          e.target.value !== ""
-        ) {
-          alert("Ошибка: Неккоретный почтовый ящик");
-          e.target.value = "";
-        }
-      });
-    });
-
-    inputsTel.forEach((input) => {
-      input.addEventListener("change", (e) => {
-        if (!e.target.value.match(/[\d-\(\)]+/gi) && e.target.value !== "") {
-          alert("Ошибка: Неккоретный номер телефона");
-          e.target.value = "";
-        }
-      });
-    });
-  };
-
-  form1.addEventListener("submit", (form1) => {
-    event.preventDefault();
-    validate(form1);
+  inputsName.forEach((input) => {
+    if (!/[\W\-\s]+/gi.test(input.value) && input.value !== "") {
+      message.push("Ошибка: Неккоректное имя");
+      input.value = "";
+      response = false;
+    }
   });
-  validate(form1);
+
+  inputsEmail.forEach((input) => {
+    if (
+      !input.value.match(
+        /[a-z\-\_\.\!\~\*]+[@][a-z\-\_\!\~\*]+[\.][a-z\-\_\!\~\*]+/gi
+      ) &&
+      input.value !== ""
+    ) {
+      message.push("Ошибка: Неккоретный почтовый ящик");
+      input.target.value = "";
+      response = false;
+    }
+  });
+
+  inputsTel.forEach((input) => {
+    if (!input.value.match(/[\d-\(\)]+/gi) && input.value !== "") {
+      message.push("Ошибка: Неккоретный номер телефона");
+      input.value = "";
+      response = false;
+    }
+  });
+
+  inputsMessage.forEach((input) => {
+    if (!input.value.match(/[а-я\s0-9\.\,\!\?]+/gi) && input.value !== "") {
+      message.push("Ошибка: Неккоретное сообщение");
+      input.value = "";
+      response = false;
+    }
+  });
+  return { response, message };
 };
 
-export default validation;
+export default validate;
