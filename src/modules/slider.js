@@ -91,7 +91,6 @@ const slider = (classes) => {
     if (!e.target.matches(".dot, .portfolio-btn")) {
       return;
     }
-    debugger;
     prevSlide(slides, currentSlide, classActiveSlides);
     prevSlide(dots, currentSlide, classActiveDots);
 
