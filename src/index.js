@@ -8,19 +8,22 @@ import validateCalc from "./modules/validationCalc";
 import calculate from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-
 timer("31 august 2022");
 menu();
 modal();
 tabs();
 
-slider([
+slider(
   "portfolio-content",
   "portfolio-item",
+  "portfolio-dots",
   "dot",
   "portfolio-item-active",
   "dot-active",
-]);
+  "portfolio-btn",
+  "arrow-left",
+  "arrow-right"
+);
 
 validateForm("form1");
 validateCalc();
@@ -28,5 +31,3 @@ calculate(100);
 sendForm({ formId: "form1", someElem: [{ type: "block", id: "total" }] });
 sendForm({ formId: "form2", someElem: [{ type: "block", id: "total" }] });
 sendForm({ formId: "form3", someElem: [{ type: "block", id: "total" }] });
-
-

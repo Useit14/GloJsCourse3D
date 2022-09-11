@@ -4,7 +4,6 @@ const menu = () => {
 
   const scroll = (element, event) => {
     event.preventDefault();
-
     const targetElementName = element["hash"];
     const targetElement = document.querySelector(`${targetElementName}`);
     targetElement.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -22,31 +21,15 @@ const menu = () => {
     } else if (e.target.matches(".active-menu ul li a")) {
       e.preventDefault();
       menu.classList.toggle("active-menu");
-      scroll(e.target);
+      scroll(e.target, e);
     }
   };
 
-
-
   document.body.addEventListener("click", (e) => {
     toggleMenu(e);
-
-  menuBtn.addEventListener("click", handleMenu);
-
-  closeBtn.addEventListener("click", (e) => {
-    e.preventDefault();
-    handleMenu();
   });
 
   scrollLink.addEventListener("click", (event) => scroll(scrollLink, event));
-
-  menuItems.forEach((element) => {
-
-    element.addEventListener("click", (event) => {
-      handleMenu();
-      scroll(element, event);
-    });
-  });
 };
 
 export default menu;

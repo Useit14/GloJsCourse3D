@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 const path = require("path");
 
 module.exports = {
@@ -10,7 +11,7 @@ module.exports = {
   devServer: {
     hot: true,
     static: {
-      directory: "./dist",
+      directory: "dist",
       watch: true,
     },
   },
