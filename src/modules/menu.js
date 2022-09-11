@@ -5,7 +5,9 @@ const menu = () => {
   const menuItems = menu.querySelectorAll("ul>li>a");
   const scrollLink = document.querySelector('a[href="#service-block"]');
 
-  const scroll = (element) => {
+
+  const scroll = (element, event) => {
+    event.preventDefault();
     const targetElementName = element["hash"];
     const targetElement = document.querySelector(`${targetElementName}`);
     targetElement.scrollIntoView({ block: "start", behavior: "smooth" });
@@ -22,13 +24,13 @@ const menu = () => {
     handleMenu();
   });
 
-  scrollLink.addEventListener("click", () => scroll(scrollLink));
+  scrollLink.addEventListener("click", (event) => scroll(scrollLink, event));
 
   menuItems.forEach((element) => {
-    element.addEventListener("click", (e) => {
-      e.preventDefault();
+
+    element.addEventListener("click", (event) => {
       handleMenu();
-      scroll(element);
+      scroll(element, event);
     });
   });
 };
