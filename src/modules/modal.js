@@ -23,7 +23,8 @@ const modal = () => {
     });
   });
 
-  closeBtn.addEventListener("click", () => {
+  closeBtn.addEventListener("click", (e) => {
+    e.preventDefault();
     modal.style.display = "none";
   });
 };
