@@ -1,8 +1,10 @@
 /* eslint-disable indent */
 import validation from "./validationForm";
 import { animate } from "./helpers";
+
 const sendForm = ({ formId, someElem = [] }) => {
-  const form = document.getElementById(formId);
+  const form = document.querySelector(`#${formId}`);
+  const btnForm = form.querySelector(".form-btn");
   const statusBlock = document.createElement("div");
   const img = document.createElement("img");
   const successText = "Спасибо! Наш менеджер с Вами свяжется!";
@@ -16,21 +18,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     form.append(statusBlock);
   };
 
-  const sendData = (data) =>
-    fetch("https://jsonplaceholder.typicode.com/posts", {
-      method: "POST",
-      body: JSON.stringify(data),
-      headers: {
-        "Content-type": "application/json",
-      },
-    }).then((res) => res.json());
-
-  const submitForm = () => {
-    const formElemtns = form.querySelectorAll("input");
-
-    const formData = new FormData(form);
-    const formBody = {};
-
+  const sendData = async (data) => {
     statusBlock.textContent = "";
     statusBlock.style.opacity = "1";
     img.style.opacity = "1";
@@ -44,6 +32,20 @@ const sendForm = ({ formId, someElem = [] }) => {
         img.style.transform = `rotate(${parseInt(progress * 360)}deg)`;
       },
     });
+    return await fetch("https://jsonplaceholder.typicode.com/posts", {
+      method: "POST",
+      body: JSON.stringify(data),
+      headers: {
+        "Content-type": "application/json",
+      },
+    }).then((res) => res.json());
+  };
+
+  const submitForm = () => {
+    const formElemtns = form.querySelectorAll("input");
+
+    const formData = new FormData(form);
+    const formBody = {};
 
     formData.forEach((value, key) => {
       formBody[key] = value;
@@ -107,7 +109,7 @@ const sendForm = ({ formId, someElem = [] }) => {
     if (!form) {
       throw new Error("Верните форму на место, пожалуйста");
     }
-    form.addEventListener("submit", (event) => {
+    btnForm.addEventListener("click", (event) => {
       event.preventDefault();
       initPreloader();
       submitForm();
