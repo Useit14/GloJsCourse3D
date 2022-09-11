@@ -35,12 +35,12 @@ const calc = (price = 100) => {
       timing(timeFraction) {
         return timeFraction;
       },
+
       draw(progress) {
-        total.textContent = Math.trunc(progress * totalValue);
+        total.textContent = parseInt(progress * +totalValue);
       },
     });
   };
-
   calcBlock.addEventListener("input", (e) => {
     if (
       e.target === calcType ||

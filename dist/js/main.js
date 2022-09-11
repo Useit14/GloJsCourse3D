@@ -16,27 +16,6 @@
   \******************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var _modules_timer__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./modules/timer */ \"./modules/timer.js\");\n/* harmony import */ var _modules_menu__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./modules/menu */ \"./modules/menu.js\");\n/* harmony import */ var _modules_modal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/modal */ \"./modules/modal.js\");\n/* harmony import */ var _modules_validationForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/validationForm */ \"./modules/validationForm.js\");\n/* harmony import */ var _modules_validationCalc__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/validationCalc */ \"./modules/validationCalc.js\");\n/* harmony import */ var _modules_calc__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/calc */ \"./modules/calc.js\");\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n(0,_modules_timer__WEBPACK_IMPORTED_MODULE_0__[\"default\"])(\"31 august 2022\");\r\n(0,_modules_menu__WEBPACK_IMPORTED_MODULE_1__[\"default\"])();\r\n(0,_modules_modal__WEBPACK_IMPORTED_MODULE_2__[\"default\"])();\r\n(0,_modules_validationForm__WEBPACK_IMPORTED_MODULE_3__[\"default\"])();\r\n(0,_modules_validationCalc__WEBPACK_IMPORTED_MODULE_4__[\"default\"])();\r\n(0,_modules_calc__WEBPACK_IMPORTED_MODULE_5__[\"default\"])(100);\r\n\n\n//# sourceURL=webpack:///./index.js?");
-
-/***/ }),
-
-/***/ "./modules/calc.js":
-/*!*************************!*\
-  !*** ./modules/calc.js ***!
-  \*************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var _helpers__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./helpers */ \"./modules/helpers.js\");\n/* eslint-disable indent */\r\n\r\n\r\nconst calc = (price = 100) => {\r\n  const calcBlock = document.querySelector(\".calc-block\");\r\n  const calcType = document.querySelector(\".calc-type\");\r\n  const calcSquare = document.querySelector(\".calc-square\");\r\n  const calcCount = document.querySelector(\".calc-count\");\r\n  const calcDay = document.querySelector(\".calc-day\");\r\n  const total = document.getElementById(\"total\");\r\n\r\n  const countCalc = () => {\r\n    const calcTypeValue = +calcType.options[calcType.selectedIndex].value;\r\n    const calcSquareValue = calcSquare.value;\r\n    let totalValue = 0;\r\n    let calcCountValue = 1;\r\n    let calcDayValue = 1;\r\n\r\n    if (calcCount.value > 1) {\r\n      calcCountValue += +calcCount.value / 10;\r\n    }\r\n    if (calcDay.value && calcDay.value < 5) {\r\n      calcDayValue = 2;\r\n    } else if (calcDay.value && calcDay.value < 10) {\r\n      calcDayValue = 1.5;\r\n    }\r\n    if (price * calcTypeValue * calcSquareValue) {\r\n      totalValue =\r\n        price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue;\r\n    } else {\r\n      totalValue = 0;\r\n    }\r\n    (0,_helpers__WEBPACK_IMPORTED_MODULE_0__.animate)({\r\n      duration: 500,\r\n      timing(timeFraction) {\r\n        return timeFraction;\r\n      },\r\n      draw(progress) {\r\n        total.textContent = Math.trunc(progress * totalValue);\r\n      },\r\n    });\r\n  };\r\n\r\n  calcBlock.addEventListener(\"input\", (e) => {\r\n    if (\r\n      e.target === calcType ||\r\n      e.target === calcSquare ||\r\n      e.target === calcCount ||\r\n      e.target === calcDay\r\n    ) {\r\n      countCalc();\r\n    }\r\n  });\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (calc);\r\n\n\n//# sourceURL=webpack:///./modules/calc.js?");
-
-/***/ }),
-
-/***/ "./modules/helpers.js":
-/*!****************************!*\
-  !*** ./modules/helpers.js ***!
-  \****************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"animate\": () => (/* binding */ animate),\n/* harmony export */   \"slicer\": () => (/* binding */ slicer)\n/* harmony export */ });\nconst slicer = (str, num) => {\r\n  return str.trim().lenght > num ? str.substring(0, num) + \"...\" : str.trim();\r\n};\r\n\r\nconst animate = ({ timing, draw, duration }, params) => {\r\n  let start = performance.now();\r\n\r\n  requestAnimationFrame(function animate(time) {\r\n    let timeFraction = (time - start) / duration;\r\n    if (timeFraction > 1) timeFraction = 1;\r\n\r\n    let progress = timing(timeFraction);\r\n\r\n    draw(progress); // отрисовать её\r\n\r\n    if (timeFraction < 1) {\r\n      requestAnimationFrame(animate);\r\n    }\r\n  });\r\n};\r\n\r\n\r\n\n\n//# sourceURL=webpack:///./modules/helpers.js?");
 
 /***/ }),
 
@@ -46,8 +25,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   \*************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst menu = () => {\r\n  const menuBtn = document.querySelector(\".menu\");\r\n  const menu = document.querySelector(\"menu\");\r\n  const closeBtn = menu.querySelector(\".close-btn\");\r\n  const menuItems = menu.querySelectorAll(\"ul>li>a\");\r\n  const scrollLink = document.querySelector('a[href=\"#service-block\"]');\r\n\r\n  const scroll = (element, event) => {\r\n    event.preventDefault();\r\n    const targetElementName = element[\"hash\"];\r\n    const targetElement = document.querySelector(`${targetElementName}`);\r\n    targetElement.scrollIntoView({ block: \"start\", behavior: \"smooth\" });\r\n  };\r\n\r\n  const handleMenu = () => {\r\n    menu.classList.toggle(\"active-menu\");\r\n  };\r\n\r\n  menuBtn.addEventListener(\"click\", handleMenu);\r\n\r\n  closeBtn.addEventListener(\"click\", handleMenu);\r\n\r\n  scrollLink.addEventListener(\"click\", (event) => scroll(scrollLink, event));\r\n\r\n  menuItems.forEach((element) => {\r\n    element.addEventListener(\"click\", (event) => {\r\n      handleMenu();\r\n      scroll(element, event);\r\n    });\r\n  });\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (menu);\r\n\n\n//# sourceURL=webpack:///./modules/menu.js?");
-
 /***/ }),
 
 /***/ "./modules/modal.js":
@@ -55,8 +32,6 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
   !*** ./modules/modal.js ***!
   \**************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst modal = () => {\r\n  const buttons = document.querySelectorAll(\".popup-btn\");\r\n  const modal = document.querySelector(\".popup\");\r\n  const closeBtn = modal.querySelector(\".popup-close\");\r\n  const popupContent = modal.querySelector(\".popup-content\");\r\n  let animId;\r\n\r\n  const animModal = (prop) => {\r\n    const step = prop + 10;\r\n    animId = requestAnimationFrame(() => animModal(step));\r\n    popupContent.style.transform = `rotate(${step}deg)`;\r\n    if (step === 360) {\r\n      cancelAnimationFrame(animId);\r\n    }\r\n  };\r\n\r\n  buttons.forEach((element) => {\r\n    element.addEventListener(\"click\", () => {\r\n      modal.style.display = \"block\";\r\n      if (screen.width >= 768) {\r\n        animModal(0);\r\n      }\r\n    });\r\n  });\r\n\r\n  closeBtn.addEventListener(\"click\", () => {\r\n    modal.style.display = \"none\";\r\n  });\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (modal);\r\n\n\n//# sourceURL=webpack:///./modules/modal.js?");
 
 /***/ }),
 
@@ -70,23 +45,11 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./modules/validationCalc.js":
-/*!***********************************!*\
-  !*** ./modules/validationCalc.js ***!
-  \***********************************/
-/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst validation = () => {\r\n  const validate = (input) => {\r\n    if (!input.value.match(/\\d/gi)) {\r\n      alert(\"Введите цифры\");\r\n      input.value = \"\";\r\n    }\r\n  };\r\n\r\n  const calcBlock = document.querySelector(\".calc-block\");\r\n\r\n  calcBlock.addEventListener(\"change\", (e) => {\r\n    if (e.target.classList.contains(\"calc-item\")) {\r\n      validate(e.target);\r\n    }\r\n  });\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (validation);\r\n\n\n//# sourceURL=webpack:///./modules/validationCalc.js?");
-
-/***/ }),
-
 /***/ "./modules/validationForm.js":
 /*!***********************************!*\
   !*** ./modules/validationForm.js ***!
   \***********************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
-
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\nconst validation = () => {\r\n  const form1 = document.getElementById(\"form1\");\r\n\r\n  const validate = (form) => {\r\n    const inputsText = form.querySelectorAll(\"input[type=text]\");\r\n    const inputsEmail = form.querySelectorAll(\".form-email\");\r\n    const inputsTel = form.querySelectorAll(\".form-phone\");\r\n\r\n    inputsText.forEach((input) => {\r\n      input.addEventListener(\"change\", (e) => {\r\n        if (!/[\\W\\-\\s]+/gi.test(e.target.value) && e.target.value !== \"\") {\r\n          alert(\"Ошибка: Неккоректное имя\");\r\n          e.target.value = \"\";\r\n        }\r\n      });\r\n    });\r\n\r\n    inputsEmail.forEach((input) => {\r\n      input.addEventListener(\"change\", (e) => {\r\n        if (\r\n          !e.target.value.match(\r\n            /[a-z\\-\\_\\.\\!\\~\\*]+[@][a-z\\-\\_\\!\\~\\*]+[\\.][a-z\\-\\_\\!\\~\\*]+/gi\r\n          ) &&\r\n          e.target.value !== \"\"\r\n        ) {\r\n          alert(\"Ошибка: Неккоретный почтовый ящик\");\r\n          e.target.value = \"\";\r\n        }\r\n      });\r\n    });\r\n\r\n    inputsTel.forEach((input) => {\r\n      input.addEventListener(\"change\", (e) => {\r\n        if (!e.target.value.match(/[\\d-\\(\\)]+/gi) && e.target.value !== \"\") {\r\n          alert(\"Ошибка: Неккоретный номер телефона\");\r\n          e.target.value = \"\";\r\n        }\r\n      });\r\n    });\r\n  };\r\n\r\n  form1.addEventListener(\"submit\", (form1) => {\r\n    event.preventDefault();\r\n    validate(form1);\r\n  });\r\n  validate(form1);\r\n};\r\n\r\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (validation);\r\n\n\n//# sourceURL=webpack:///./modules/validationForm.js?");
 
 /***/ })
 
