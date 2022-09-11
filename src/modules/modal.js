@@ -3,7 +3,6 @@ import { animate } from "./helpers";
 const modal = () => {
   const buttons = document.querySelectorAll(".popup-btn");
   const modal = document.querySelector(".popup");
-  const closeBtn = modal.querySelector(".popup-close");
   const popupContent = modal.querySelector(".popup-content");
 
   buttons.forEach((element) => {
@@ -23,9 +22,19 @@ const modal = () => {
     });
   });
 
+
+  modal.addEventListener("click", (e) => {
+    if (
+      !e.target.closest(".popup-content") ||
+      e.target.classList.contains("popup-close")
+    ) {
+      modal.style.display = "none";
+    }
+
   closeBtn.addEventListener("click", (e) => {
     e.preventDefault();
     modal.style.display = "none";
+
   });
 };
 

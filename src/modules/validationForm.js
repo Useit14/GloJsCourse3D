@@ -36,6 +36,7 @@ const validation = () => {
 
   userForm.forEach((form) => {
     form.addEventListener("change", (e) => validate(e));
+
   });
 
 const validate = (idForm) => {
@@ -85,6 +86,7 @@ const validate = (idForm) => {
     }
   });
   return { response, message };
+
 };
 
 export default validate;
