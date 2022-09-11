@@ -26,7 +26,7 @@ const validate = (idForm) => {
       input.value !== ""
     ) {
       message.push("Ошибка: Неккоретный почтовый ящик");
-      input.target.value = "";
+      input.value = "";
       response = false;
     }
   });

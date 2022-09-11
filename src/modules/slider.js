@@ -51,7 +51,6 @@ const slider = (classes) => {
     const ul = document.createElement("ul");
     ul.classList.add("portfolio-dots");
     slides.forEach((slide, index) => {
-      debugger;
       const li = document.createElement("li");
       li.classList.add("dot");
       if (index === 0) li.classList.add(classActiveDots);

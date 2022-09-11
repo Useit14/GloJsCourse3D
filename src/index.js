@@ -8,7 +8,7 @@ import validateCalc from "./modules/validationCalc";
 import calculate from "./modules/calc";
 import sendForm from "./modules/sendForm";
 
-timer("31 august 2022");
+timer("20 september 2022");
 menu();
 modal();
 tabs();
