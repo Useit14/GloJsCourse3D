@@ -1,16 +1,13 @@
 const validation = () => {
-  const validate = (input) => {
-    if (!input.value.match(/\d/gi)) {
-      alert("Введите цифры");
-      input.value = "";
-    }
+  const validate = (e) => {
+    e.target.value = e.target.value.replace(/[^0-9]/gi, "");
   };
 
   const calcBlock = document.querySelector(".calc-block");
 
-  calcBlock.addEventListener("change", (e) => {
+  calcBlock.addEventListener("input", (e) => {
     if (e.target.classList.contains("calc-item")) {
-      validate(e.target);
+      validate(e);
     }
   });
 };
