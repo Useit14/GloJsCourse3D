@@ -1,5 +1,5 @@
 /* eslint-disable indent */
-import { validation, validateInput } from "./validationForm";
+import { validation } from "./validationForm";
 import { animate } from "./helpers";
 
 const sendForm = ({ formId, someElem = [] }) => {
@@ -59,7 +59,7 @@ const sendForm = ({ formId, someElem = [] }) => {
         formBody[elem.id] = element.value;
       }
     });
-    const { response, message } = validation(formId);
+    const { response, message } = validation(formId, "change");
     if (response) {
       sendData(formBody)
         .then((data) => {
@@ -110,10 +110,6 @@ const sendForm = ({ formId, someElem = [] }) => {
     if (!form) {
       throw new Error("Верните форму на место, пожалуйста");
     }
-
-    formInputs.forEach((input) => {
-      input.addEventListener("blur", (e) => validateInput(e));
-    });
 
     btnForm.addEventListener("click", (event) => {
       event.preventDefault();

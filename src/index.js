@@ -24,6 +24,9 @@ slider(
   "arrow-right"
 );
 validation("form1");
+validation("form2");
+validation("form3");
+
 validateCalc();
 calculate(100);
 sendForm({ formId: "form1", someElem: [{ type: "block", id: "total" }] });
