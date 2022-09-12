@@ -12,13 +12,17 @@ timer("20 september 2022");
 menu();
 modal();
 tabs();
-slider([
+slider(
   "portfolio-content",
   "portfolio-item",
+  "portfolio-dots",
   "dot",
   "portfolio-item-active",
   "dot-active",
-]);
+  "portfolio-btn",
+  "arrow-left",
+  "arrow-right"
+);
 validateForm("form1");
 validateCalc();
 calculate(100);

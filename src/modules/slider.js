@@ -1,18 +1,37 @@
-const slider = (classes) => {
+const slider = (
+  classSlider,
+  classSlides,
+  classParentDots,
+  classDots,
+  classActiveSlides = "portfolio-item-active",
+  classActiveDots = "dot - active",
+  portfolioBtn,
+  arrowLeft,
+  arrowRight
+) => {
   try {
+    const classes = [
+      classSlider,
+      classSlides,
+      classActiveSlides,
+      portfolioBtn,
+      arrowLeft,
+      arrowRight,
+    ];
     let result = false;
     classes.forEach((prop) => {
       for (let index = 0; index < document.styleSheets.length; index++) {
         const element = document.styleSheets[index];
         for (let index = 0; index < element["rules"].length; index++) {
           const elementInner = element["rules"][index];
-          if (
-            elementInner.selectorText &&
-            elementInner.selectorText.includes(`.${prop}`)
-          ) {
-            result = true;
-            return;
-          }
+          if (prop)
+            if (
+              elementInner.selectorText &&
+              elementInner.selectorText.includes(`.${prop}`)
+            ) {
+              result = true;
+              return;
+            }
         }
       }
       if (result === false) throw new SyntaxError("Error");
@@ -20,14 +39,6 @@ const slider = (classes) => {
   } catch (e) {
     return;
   }
-
-  const [
-    classSlider,
-    classSlides,
-    classDots,
-    classActiveSlides,
-    classActiveDots,
-  ] = classes;
 
   const sliderBlock = document.querySelector(`.${classSlider}`);
   const slides = document.querySelectorAll(`.${classSlides}`);
@@ -39,17 +50,9 @@ const slider = (classes) => {
   let currentSlide = 0;
   let interval;
 
-  const validate = () => {
-    if (!document.querySelector(classSlider)) return;
-    if (!document.querySelector(classSlides)) return;
-    if (!document.querySelector(classDots)) return;
-    if (!document.querySelector(classActiveSlides)) return;
-    if (!document.querySelector(classActiveDots)) return;
-  };
-
   const initDots = () => {
     const ul = document.createElement("ul");
-    ul.classList.add("portfolio-dots");
+    ul.classList.add(classParentDots);
     slides.forEach((slide, index) => {
       const li = document.createElement("li");
       li.classList.add("dot");
@@ -88,17 +91,17 @@ const slider = (classes) => {
 
   sliderBlock.addEventListener("click", (e) => {
     e.preventDefault();
-    if (!e.target.matches(".dot, .portfolio-btn")) {
+    if (!e.target.matches(`.${classDots}, .${portfolioBtn}`)) {
       return;
     }
     prevSlide(slides, currentSlide, classActiveSlides);
     prevSlide(dots, currentSlide, classActiveDots);
 
-    if (e.target.matches("#arrow-right")) {
+    if (e.target.matches(`#${arrowRight}`)) {
       currentSlide++;
-    } else if (e.target.matches("#arrow-left")) {
+    } else if (e.target.matches(`#${arrowLeft}`)) {
       currentSlide--;
-    } else if (e.target.classList.contains("dot")) {
+    } else if (e.target.classList.contains(classDots)) {
       dots.forEach((dot, index) => {
         if (e.target === dot) {
           currentSlide = index;
@@ -117,7 +120,7 @@ const slider = (classes) => {
   sliderBlock.addEventListener(
     "mouseenter",
     (e) => {
-      if (e.target.matches(".dot, .portfolio-btn")) {
+      if (e.target.matches(`.${classDots}, .${portfolioBtn}`)) {
         stopSlide();
       }
     },
@@ -127,7 +130,7 @@ const slider = (classes) => {
   sliderBlock.addEventListener(
     "mouseleave",
     (e) => {
-      if (e.target.matches(".dot, .portfolio-btn")) {
+      if (e.target.matches(`.${classDots}, .${portfolioBtn}`)) {
         startSlide(timeInterval);
       }
     },
