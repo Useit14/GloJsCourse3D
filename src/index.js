@@ -3,7 +3,7 @@ import menu from "./modules/menu";
 import modal from "./modules/modal";
 import tabs from "./modules/tabs";
 import slider from "./modules/slider";
-import validateForm from "./modules/validationForm";
+import { validation } from "./modules/validationForm";
 import validateCalc from "./modules/validationCalc";
 import calculate from "./modules/calc";
 import sendForm from "./modules/sendForm";
@@ -23,7 +23,7 @@ slider(
   "arrow-left",
   "arrow-right"
 );
-validateForm("form1");
+validation("form1");
 validateCalc();
 calculate(100);
 sendForm({ formId: "form1", someElem: [{ type: "block", id: "total" }] });

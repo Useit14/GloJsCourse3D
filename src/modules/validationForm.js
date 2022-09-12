@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 
-const validate = (idForm) => {
+export const validation = (idForm) => {
   const form1 = document.getElementById(idForm);
   const inputsName = form1.querySelectorAll("input[name='user_name']");
   const inputsEmail = form1.querySelectorAll("input[name='user_email']");
@@ -31,6 +31,7 @@ const validate = (idForm) => {
   });
 
   inputsTel.forEach((input) => {
+    input.addEventListener("blur", (e) => validateInput(e));
     if (!input.value.match(/[\d\-\(\)]{6,11}/gi) || input.value === "") {
       message.push("Ошибка: Неккоретный номер телефона");
       input.value = "";
@@ -45,7 +46,19 @@ const validate = (idForm) => {
       response = false;
     }
   });
+
   return { response, message };
 };
 
-export default validate;
+export const validateInput = (e) => {
+  e.target.value = e.target.value.replace(/[\s]{2}/gi, " ");
+  e.target.value = e.target.value.replace(/^[\s\-]|[\s\-]$/gi, "");
+  if (e.target.matches('input[type="text"]')) {
+    e.target.value = e.target.value.replace(
+      /([\w]?)([\w]+$)/gi,
+      ($1, $2, $3) => {
+        return $2.toString().toUpperCase() + $3.toString().toLowerCase();
+      }
+    );
+  }
+};

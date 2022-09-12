@@ -1,9 +1,10 @@
 /* eslint-disable indent */
-import validation from "./validationForm";
+import { validation, validateInput } from "./validationForm";
 import { animate } from "./helpers";
 
 const sendForm = ({ formId, someElem = [] }) => {
   const form = document.querySelector(`#${formId}`);
+  const formInputs = form.querySelectorAll(`input`);
   const btnForm = form.querySelector(".form-btn");
   const statusBlock = document.createElement("div");
   const img = document.createElement("img");
@@ -109,6 +110,11 @@ const sendForm = ({ formId, someElem = [] }) => {
     if (!form) {
       throw new Error("Верните форму на место, пожалуйста");
     }
+
+    formInputs.forEach((input) => {
+      input.addEventListener("blur", (e) => validateInput(e));
+    });
+
     btnForm.addEventListener("click", (event) => {
       event.preventDefault();
       initPreloader();
