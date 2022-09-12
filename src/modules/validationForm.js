@@ -42,14 +42,17 @@ export const validation = (idForm, mode = "input") => {
     input.addEventListener("input", (e) => {
       if (mode === "input") {
         validateInput(e);
-        e.target.value = e.target.value.replace(/[^a-z\-\_\.\!\~\*\'@]/gi, "");
+        e.target.value = e.target.value.replace(
+          /[^a-z\-\_\.\!\~\*\'@0-9]/gi,
+          ""
+        );
         return;
       }
     });
 
     if (
       !input.value.match(
-        /[a-z\-\_\.\!\~\*\']+[@][a-z\-\_\!\~\*\']+[\.][a-z\-\_\!\~\*\']+/gi
+        /[a-z\-\_\.\!\~\*\'0-9]+[@][a-z\-\_\!\~\*\'0-9]+[\.][a-z\-\_\!\~\*\']+/gi
       ) ||
       input.value === ""
     ) {
