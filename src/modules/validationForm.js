@@ -81,7 +81,7 @@ export const validation = (idForm, mode = "input") => {
 
   inputsMessage.forEach((input) => {
     input.addEventListener("input", (e) => {
-      e.target.value = e.target.value.replace(/[а-я\s0-9\.\,\!\?]/gi, "");
+      e.target.value = e.target.value.replace(/[^а-я\s0-9\.\,\!\?]/gi, "");
       if (mode === "input") {
         validateInput(e);
         return;
